@@ -1,4 +1,3 @@
-Got it! Here's a more beginner-friendly README that reflects that it's a simple, learning-oriented project.
 
 ---
 
