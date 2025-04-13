@@ -47,7 +47,7 @@ CREATE TABLE information (
 Once MySQL is ready, simply run:
 
 ```sh
-python script.py
+python main.py
 ```
 
 This will:  
