@@ -74,5 +74,3 @@ This project is great for beginners who want to practice:
 Feel free to use and modify this project for learning purposes! 😊
 
 ---
-
-This version makes it clear that it's a beginner's project. Let me know if you'd like any tweaks! 🚀
