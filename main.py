@@ -25,7 +25,7 @@ capitals = soup.find_all("span", {"class":"country-capital"})
 populations = soup.find_all("span", {"class":"country-population"})
 areas = soup.find_all("span", {"class":"country-area"})
 # connect to database
-connection = mysql.connector.connect(host = "127.0.0.1", user = "root", password = "@Emlaei30", database = "country_info")
+connection = mysql.connector.connect(host = "127.0.0.1", user = "", password = "", database = "country_info")
 cursor = connection.cursor()
 
 # This script processes the data to ensure it is in the correct format, and inserts the cleaned data into a MySQL database.
