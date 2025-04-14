@@ -2,45 +2,69 @@ import requests
 from bs4 import BeautifulSoup
 import mysql.connector
 from sklearn import tree
+from tkinter import *
+from tkinter import ttk
 
+# This function predicts the area based on the population input from a user interface. 
+def predict_area():
+    try :
+        population = int(entry.get())
+        answer = clf.predict([[population]])
+        result_label.config(text= f"area : {answer}")
+    except ValueError :
+        result_label.config(text= "invalid value")
+
+# This code sends a HTML request to specified URL and parses it using BeautifulSoup for further web scraping.
 url = "https://www.scrapethissite.com/pages/simple/"
 response = requests.get(url)
 soup = BeautifulSoup(response.text, "html.parser")
 
-names = soup.find_all("h3", {"class":"country-name"}) # scrap names of countries
-capitals = soup.find_all("span", {"class":"country-capital"}) # scrap capitals
-populations = soup.find_all("span", {"class":"country-population"}) # scrap populations
-areas = soup.find_all("span", {"class":"country-area"}) # scrap area
-
-connection = mysql.connector.connect(host = "127.0.0.1", user = "", password = "", database = "country_info") # connect to database
+# This code scrapes the names, capitals, populations, and areas of countries using Beautiful Soup.
+names = soup.find_all("h3", {"class":"country-name"})
+capitals = soup.find_all("span", {"class":"country-capital"})
+populations = soup.find_all("span", {"class":"country-population"})
+areas = soup.find_all("span", {"class":"country-area"})
+# connect to database
+connection = mysql.connector.connect(host = "127.0.0.1", user = "root", password = "@Emlaei30", database = "country_info")
 cursor = connection.cursor()
 
+# This script processes the data to ensure it is in the correct format, and inserts the cleaned data into a MySQL database.
 for i in range(len(names)):
-    # to extract values
     name, capital, population, area = names[i].text.strip(), capitals[i].text.strip(), populations[i].text.strip(), areas[i].text.strip()
-    population = int(population.replace(",", "")) # we remove these characters to prevent error in machine learning
+    population = int(population.replace(",", ""))
     area = float(area.replace(",", ""))
-    if "'" in name : # we replace these characters to prevent error in mysql
+    if "'" in name :
         name = name.replace("'", "''")
     if "'" in capital :
         capital = capital.replace("'", "''")
-    # write on database
+    
     cursor.execute(f"INSERT INTO information(Country, Capital, Population, Area) VALUES(\'{name}\', \'{capital}\', {population}, {area})")
-    connection.commit()
+connection.commit()
 
 x = []
 y = []
-# read from database
+# This code reads population and area data from a database and stores the population in a list 'x' and the area in a list 'y'.
 cursor.execute("SELECT Population, Area FROM information")
 result = cursor.fetchall()
 for (p, a) in result :
-    x.append([p]) # This code gets the population | p is population
-    y.append(a) # and then gives the area of ​​the country | a is area
+    x.append([p])
+    y.append(a)
 
-clf = tree.DecisionTreeClassifier().fit(x, y) # use this to learn machine
+# This code initializes a Decision Tree Classifier and fits it to the provided feature set (x) and target labels (y).
+clf = tree.DecisionTreeClassifier().fit(x, y)
 
-new_data = [[1450935791], [345426571], [50448963], [24672760], [51717590]] # Enter the desired number here.
-answer = clf.predict(new_data)
-print(answer[0], answer[1], answer[2], answer[3]) # now you have the area
+# This code creates a simple GUI application using Tkinter for predicting an area based on population input. 
+root = Tk()
+root.title("predictor")
+frm = ttk.Frame(root, padding= 10)
+frm.grid()
+label_1 = ttk.Label(frm, text= "population : ").grid(column= 0, row= 0)
+entry = ttk.Entry(frm)
+entry.grid(row= 0, column= 1)
+ttk.Button(frm, text= "predict", command= predict_area).grid(row= 1, column= 2)
+result_label = ttk.Label(frm, text= "result : ", font=("Helvetica", 11))
+result_label.grid(row= 3, column= 0)
+ttk.Button(frm, text= "Done", command= root.destroy, width= 20).grid(row= 4, column= 1)
+root.mainloop()
 
 connection.close()
