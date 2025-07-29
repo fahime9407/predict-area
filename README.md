@@ -1,6 +1,4 @@
 
----
-
 ```markdown
 # 🌍 Country Area Predictor
 
