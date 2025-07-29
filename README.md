@@ -1,5 +1,4 @@
 
-```markdown
 # 🌍 Country Area Predictor
 
 This is a Python-based application that scrapes country data from a public website, stores the information in a MySQL database, trains a decision tree classifier to predict a country's area based on its population, and presents a user-friendly GUI for predictions.
