@@ -1,124 +1,71 @@
 
-# 🌍 Country Area Predictor
+# Area Prediction Project (Practice)
 
-This is a Python-based application that scrapes country data from a public website, stores the information in a MySQL database, trains a decision tree classifier to predict a country's area based on its population, and presents a user-friendly GUI for predictions.
+This project is a basic machine learning exercise aimed at predicting area values based on input features. It is implemented in a Jupyter Notebook using Python and popular data science libraries.
 
----
-
-## 🚀 Features
-
-- Web scraping of country name, capital, population, and area using `BeautifulSoup`.
-- Storage of the cleaned data into a MySQL database.
-- Machine Learning model built using `scikit-learn`'s Decision Tree Classifier.
-- A simple desktop GUI built with `Tkinter` to predict a country's area based on its population input.
+> ⚠️ **Note:** The model used in this project does not achieve high accuracy and is intended for practice purposes only.
 
 ---
 
-## 📦 Dependencies
+## 📁 Files Included
 
-Make sure you have the following libraries installed:
+- `main.ipynb`: The main Jupyter Notebook containing the code for data preprocessing, modeling, and evaluation.
+- `requirements.txt`: A list of all required Python libraries to run the notebook.
+- `data.csv`: A CSV file with the dataset, in case you're unable to fetch the data from the source.
+
+---
+
+## ⚙️ Installation
+
+To set up the environment and run the notebook:
 
 ```bash
-pip install requests beautifulsoup4 mysql-connector-python scikit-learn
-```
+# Create and activate a virtual environment (optional but recommended)
+python -m venv venv
+venv\Scripts\activate  # on Windows
 
----
+# Install required packages
+pip install -r requirements.txt
+````
 
-## 🛠️ Setup Instructions
-
-1. **Clone the repository:**
-
-```bash
-git clone https://github.com/your-username/country-area-predictor.git
-cd country-area-predictor
-```
-
-2. **Create the MySQL Database:**
-
-Before running the script, you must create a MySQL database and a table named `information`.
-
-```sql
-CREATE DATABASE country_info;
-
-USE country_info;
-
-CREATE TABLE information (
-  Country VARCHAR(100),
-  Capital VARCHAR(100),
-  Population INT,
-  Area FLOAT
-);
-```
-
-3. **Update Database Credentials:**
-
-In the script, replace the following values with your actual MySQL credentials:
-
-```python
-connection = mysql.connector.connect(
-    host="127.0.0.1",
-    user="your-username",
-    password="your-password",
-    database="country_info"
-)
-```
-
-4. **Run the script:**
+Then open the notebook:
 
 ```bash
-python main.py
-```
-
-A Tkinter window will appear allowing you to input a population and predict the area based on the trained decision tree model.
-
----
-
-## 🧠 How It Works
-
-- The app scrapes data from [`scrapethissite.com`](https://www.scrapethissite.com/pages/simple/).
-- It processes and cleans the data.
-- The data is inserted into a MySQL table.
-- The model is trained using population as a feature and area as the target.
-- The user inputs a population number via GUI to receive a predicted area.
-
----
-
-## 🖼️ GUI Preview
-
-![Tkinter GUI Example](https://user-images.githubusercontent.com/example/gui-preview.png)
-
----
-
-## ✅ To-Do / Improvements
-
-- Add error handling for database and network errors.
-- Improve prediction accuracy by using more features (e.g., continent, GDP, etc.).
-- Add data caching to avoid re-scraping on every run.
-- Refactor into modules (`scraper.py`, `database.py`, `model.py`, `gui.py`) for cleaner architecture.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🤝 Contributing
-
-Pull requests are welcome! For major changes, please open an issue first to discuss what you'd like to change.
-
----
-
-## 🙋‍♀️ Author
-
-**[fahime]** – [@fahime9407](https://github.com/fahime9407)
-
----
-
-## ⚠️ Disclaimer
-
-> This project was created as a **beginner-level practice**. The dataset contains **only around 200 samples**, which means the predictions made by the machine learning model are **not highly accurate** and should not be used for serious decision-making. The primary goal of this project was to practice web scraping, data processing, ML model training, and GUI creation in Python.
+jupyter notebook main.ipynb
 ```
 
 ---
+
+## 📊 Dataset
+
+If you experience any issues retrieving the dataset from the original source (e.g., due to network errors or site changes), a copy of the data is included in the project as `data.csv`.
+
+---
+
+## 🚧 Disclaimer
+
+This project is **for educational and practice purposes only**. The model's R² score is low, indicating limited accuracy in predictions. No real-world conclusions should be drawn from this result.
+
+---
+
+## 🧪 Requirements
+
+All required libraries are listed in the `requirements.txt` file and include:
+
+* pandas
+* numpy
+* scikit-learn
+* matplotlib
+* seaborn
+
+You can install them using:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 📬 Contact
+
+Feel free to use this code as a template for experimentation or learning. If you have questions or feedback, you're welcome to get in touch.
