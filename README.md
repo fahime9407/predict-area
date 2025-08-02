@@ -20,8 +20,8 @@ A beginner-friendly project that combines **web scraping**, **data preprocessing
 
 | File                        | Description                                                                    |
 | --------------------------- | ------------------------------------------------------------------------------ |
-| `notebook_regression.ipynb` | Full data pipeline (scraping → cleaning → training → evaluation) + Tkinter GUI |
-| `app_database.py`           | Scrapes + saves to MySQL + trains classifier + launches prediction GUI         |
+| `main.ipynb` | Full data pipeline (scraping → cleaning → training → evaluation) + Tkinter GUI |
+| `main.py`           | Scrapes + saves to MySQL + trains Regressor + launches prediction GUI         |
 | `country_info.csv`          | Cleaned country dataset (use if scraping fails)                                |
 | `requirements.txt`          | All required Python packages                                                   |
 
@@ -32,8 +32,8 @@ A beginner-friendly project that combines **web scraping**, **data preprocessing
 1. 🔧 Clone the repo
 
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-   cd your-repo-name
+   git clone https://github.com/fahime9407/predict-area.git
+   cd predict-area
    ```
 
 2. 📦 Install dependencies
@@ -56,7 +56,7 @@ A beginner-friendly project that combines **web scraping**, **data preprocessing
 Ideal for analysis and visualization.
 
 ```bash
-jupyter notebook notebook_regression.ipynb
+jupyter notebook main.ipynb
 ```
 
 You can skip scraping and use `country_info.csv` directly.
@@ -68,7 +68,7 @@ You can skip scraping and use `country_info.csv` directly.
 Ideal for testing with a database and GUI.
 
 ```bash
-python app_database.py
+python main.py
 ```
 
 > 💡 The GUI allows you to enter a population and see the predicted area!
@@ -80,8 +80,3 @@ python app_database.py
 * All required libraries are listed in `requirements.txt`.
 * If scraping fails (e.g., due to internet issues), use the provided `country_info.csv` as a backup dataset.
 
----
-
-## 📸 Screenshots (optional)
-
-*Add some screenshots of your plots or GUI for better visual appeal.*

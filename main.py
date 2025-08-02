@@ -51,7 +51,7 @@ for (p, a) in result :
     y.append(a)
 
 # This code initializes a Decision Tree Classifier and fits it to the provided feature set (x) and target labels (y).
-clf = tree.DecisionTreeClassifier().fit(x, y)
+clf = tree.DecisionTreeRegressor().fit(x, y)
 
 # This code creates a simple GUI application using Tkinter for predicting an area based on population input. 
 root = Tk()
