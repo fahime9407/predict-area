@@ -10,7 +10,7 @@ def predict_area():
     try :
         population = int(entry.get())
         answer = clf.predict([[population]])
-        result_label.config(text= f"area : {answer}")
+        result_label.config(text= f"area : {answer[0]:.5f}")
     except ValueError :
         result_label.config(text= "invalid value")
 
@@ -24,7 +24,7 @@ names = soup.find_all("h3", {"class":"country-name"})
 capitals = soup.find_all("span", {"class":"country-capital"})
 populations = soup.find_all("span", {"class":"country-population"})
 areas = soup.find_all("span", {"class":"country-area"})
-# connect to database
+# to connect to database enter your user and password
 connection = mysql.connector.connect(host = "127.0.0.1", user = "", password = "", database = "country_info")
 cursor = connection.cursor()
 
