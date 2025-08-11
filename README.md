@@ -1,82 +1,130 @@
 
-# 🌍 Country Info Scraper & Area Predictor
+# Country Information Scraper & Area Predictor
 
-A beginner-friendly project that combines **web scraping**, **data preprocessing**, **machine learning**, and a simple **GUI app** — all in Python! You can either use live web data or fall back to a local dataset.
-
----
-
-## 📦 Project Features
-
-✅ Web scraping from [scrapethissite.com](https://www.scrapethissite.com/pages/simple/)
-✅ Data cleaning & outlier removal
-✅ Train a `DecisionTreeRegressor` to predict **area** based on **population**
-✅ Use MySQL to store structured country data
-✅ GUI app built with **Tkinter** for live predictions
-✅ Ready-to-use dataset provided if scraping fails
+A Python project that:
+1. Scrapes country data (name, capital, population, and area) from a public website.
+2. Stores the data in a MySQL database.
+3. Trains a Decision Tree regression model to predict the **area** of a country based on its **population**.
+4. Provides a **Tkinter-based GUI** for prediction and accuracy display.
 
 ---
 
-## 🗂️ File Structure
-
-| File                        | Description                                                                    |
-| --------------------------- | ------------------------------------------------------------------------------ |
-| `main.ipynb` | Full data pipeline (scraping → cleaning → training → evaluation) + Tkinter GUI |
-| `main.py`           | Scrapes + saves to MySQL + trains Regressor + launches prediction GUI         |
-| `country_info.csv`          | Cleaned country dataset (use if scraping fails)                                |
-| `requirements.txt`          | All required Python packages                                                   |
+## 📌 Features
+- **Web Scraping** using `requests` and `BeautifulSoup`
+- **Data Storage** in MySQL
+- **Machine Learning Model** with `DecisionTreeRegressor` from `scikit-learn`
+- **Accuracy Calculation** using R² score
+- **GUI Application** for real-time prediction
 
 ---
 
-## ⚙️ Installation
+## 🛠️ Requirements
+Make sure you have Python 3.x installed and the following libraries:
 
-1. 🔧 Clone the repo
-
-   ```bash
-   git clone https://github.com/fahime9407/predict-area.git
-   cd predict-area
-   ```
-
-2. 📦 Install dependencies
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. 🛢️ (Optional) Setup MySQL
-
-   * Create a database named `country_info`
-   * Create a table called `information` with fields: `Country`, `Capital`, `Population`, `Area`
-
----
-
-## 🚀 How to Use
-
-### Option 1: Run the Notebook
-
-Ideal for analysis and visualization.
+You can install all required packages using the provided `requirements.txt` file:
 
 ```bash
-jupyter notebook main.ipynb
-```
+pip install -r requirements.txt
+````
 
-You can skip scraping and use `country_info.csv` directly.
+The main dependencies are:
+
+* `requests`
+* `beautifulsoup4`
+* `mysql-connector-python`
+* `scikit-learn`
+* `numpy`
+* `tkinter` (usually comes pre-installed with Python)
+
+You will also need:
+
+* **MySQL Server** installed and running.
+* A database named `country_info` with a table:
+
+```sql
+CREATE TABLE information (
+    Country VARCHAR(255),
+    Capital VARCHAR(255),
+    Population BIGINT,
+    Area FLOAT
+);
+```
 
 ---
 
-### Option 2: Run the Script
+## Alternative Data Source
 
-Ideal for testing with a database and GUI.
-
-```bash
-python main.py
-```
-
-> 💡 The GUI allows you to enter a population and see the predicted area!
+If working with MySQL is difficult for you, a CSV file containing the scraped country data is also included in this repository.
+You can use this file to load the data without needing a database setup.
 
 ---
 
-## ❗ Notes
+## ⚙️ How It Works
 
-* All required libraries are listed in `requirements.txt`.
-* If scraping fails (e.g., due to internet issues), use the provided `country_info.csv` as a backup dataset.
+1. **Scraping**
 
+   * Fetches country data from:
+     `https://www.scrapethissite.com/pages/simple/`
+   * Extracts **name**, **capital**, **population**, and **area**.
+
+2. **Database Storage**
+
+   * Inserts the scraped data into the `information` table of the `country_info` MySQL database.
+
+3. **Model Training**
+
+   * Reads population and area from the database.
+   * Fits a Decision Tree Regressor model.
+
+4. **GUI Prediction**
+
+   * First GUI: Displays model accuracy.
+   * Second GUI: Takes **population** as input and predicts **area**.
+
+---
+
+## 🚀 Usage
+
+1. **Configure Database Connection**
+   In the code:
+
+   ```python
+   connection = mysql.connector.connect(
+       host="127.0.0.1",
+       user="root",
+       password="YOUR_PASSWORD",
+       database="country_info"
+   )
+   ```
+
+   Replace `YOUR_PASSWORD` with your MySQL password.
+
+2. **Run the Script**
+
+   ```bash
+   python main.py
+   ```
+
+3. **Interact with the GUI**
+
+   * First window: Shows model accuracy. Click **OK**.
+   * Second window: Enter population, click **Predict**, and view predicted area.
+
+---
+
+## 🔒 Security Notes
+
+* **Do NOT** commit your real MySQL password to GitHub. Use environment variables or a `.env` file.
+* The provided scraping URL is for demonstration purposes only. Ensure you respect website `robots.txt` rules when scraping.
+
+---
+
+## 📷 Screenshot Example
+
+![GUI Screenshot](image.png)
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License. Feel free to use and modify it.
