@@ -121,7 +121,7 @@ You can use this file to load the data without needing a database setup.
 
 ## 📷 Screenshot Example
 
-![GUI Screenshot](image.png)
+![GUI Screenshot](image.PNG)
 
 ---
 
